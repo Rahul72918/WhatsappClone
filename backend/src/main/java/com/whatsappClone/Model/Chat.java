@@ -17,7 +17,7 @@ import jakarta.persistence.OneToMany;
 public class Chat {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String chatName;

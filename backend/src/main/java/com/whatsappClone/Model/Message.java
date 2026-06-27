@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 public class Message {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String content;
     private LocalDateTime timestamp;
