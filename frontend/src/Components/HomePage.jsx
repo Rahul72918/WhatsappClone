@@ -139,6 +139,22 @@ function HomePage() {
     dispatch(getUsersChat({ token }));
   }, [chat.createdChat, chat.createdGroup]);
 
+  // Effect to open newly created chat
+  useEffect(() => {
+    if (chat.createdChat) {
+      setCurrentChat(chat.createdChat);
+      setQuerys("");
+    }
+  }, [chat.createdChat]);
+
+  // Effect to open newly created group
+  useEffect(() => {
+    if (chat.createdGroup) {
+      setCurrentChat(chat.createdGroup);
+      setIsGroup(false);
+    }
+  }, [chat.createdGroup]);
+
   // Function to handle opening the user menu
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
