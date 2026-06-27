@@ -7,6 +7,8 @@ import { currentUser, login } from "../../Redux/Auth/Action";
 
 const Signin = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const [inputData, setInputData] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,7 +19,6 @@ const Signin = () => {
     e.preventDefault();
     // Dispatch the login action with inputData
     dispatch(login(inputData));
-    setOpenSnackbar(true);
   };
 
   const handleChange = (e) => {
@@ -39,7 +40,14 @@ const Signin = () => {
 
   useEffect(() => {
     if (auth.signin?.jwt) {
+      setSnackbarMessage("Login Successfully!!");
+      setSnackbarSeverity("success");
+      setOpenSnackbar(true);
       dispatch(currentUser(auth.signin.jwt));
+    } else if (auth.signin?.error) {
+      setSnackbarMessage(auth.signin.error);
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
     }
   }, [auth.signin, dispatch]);
 
@@ -105,10 +113,10 @@ const Signin = () => {
         >
           <Alert
             onClose={handleSnackbarClose}
-            severity="success"
+            severity={snackbarSeverity}
             sx={{ width: "100%" }}
           >
-            Login Successfully!!
+            {snackbarMessage}
           </Alert>
         </Snackbar>
       </div>
@@ -116,3 +124,4 @@ const Signin = () => {
   );
 };
 export default Signin;
+

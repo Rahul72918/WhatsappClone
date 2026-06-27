@@ -20,6 +20,12 @@ export const register = (data) => async (dispatch) => {
     });
     const resData = await res.json();
 
+    if (!res.ok) {
+      console.log("register error", resData);
+      dispatch({ type: REGISTER, payload: { error: resData.error || resData.message || "Registration failed" } });
+      return;
+    }
+
     // Store the JWT token in local storage if available
     if (resData.jwt) localStorage.setItem("token", resData.jwt);
 
@@ -27,6 +33,7 @@ export const register = (data) => async (dispatch) => {
     dispatch({ type: REGISTER, payload: resData });
   } catch (error) {
     console.log("catch error", error);
+    dispatch({ type: REGISTER, payload: { error: "Network error. Please try again." } });
   }
 };
 
@@ -42,6 +49,12 @@ export const login = (data) => async (dispatch) => {
     });
     const resData = await res.json();
 
+    if (!res.ok) {
+      console.log("login error", resData);
+      dispatch({ type: LOGIN, payload: { error: resData.error || resData.message || "Login failed" } });
+      return;
+    }
+
     // Store the JWT token in local storage if available
     if (resData.jwt) localStorage.setItem("token", resData.jwt);
 
@@ -49,6 +62,7 @@ export const login = (data) => async (dispatch) => {
     dispatch({ type: LOGIN, payload: resData });
   } catch (error) {
     console.log("catch error", error);
+    dispatch({ type: LOGIN, payload: { error: "Network error. Please try again." } });
   }
 };
 

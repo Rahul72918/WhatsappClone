@@ -7,6 +7,8 @@ import { currentUser, register } from "../../Redux/Auth/Action";
 
 const Signup = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
@@ -20,7 +22,6 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(register(inputData)); // Dispatch the register action with inputData
-    setOpenSnackbar(true);
   };
 
   const handleChange = (e) => {
@@ -38,7 +39,14 @@ const Signup = () => {
 
   useEffect(() => {
     if (auth.signup?.jwt) {
+      setSnackbarMessage("Your account has been successfully created!!");
+      setSnackbarSeverity("success");
+      setOpenSnackbar(true);
       dispatch(currentUser(auth.signup.jwt));
+    } else if (auth.signup?.error) {
+      setSnackbarMessage(auth.signup.error);
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
     }
   }, [auth.signup, dispatch]);
 
@@ -114,10 +122,10 @@ const Signup = () => {
         >
           <Alert
             onClose={handleSnackbarClose}
-            severity="success"
+            severity={snackbarSeverity}
             sx={{ width: "100%" }}
           >
-            Your account has been successfully created!!
+            {snackbarMessage}
           </Alert>
         </Snackbar>
       </div>
@@ -125,3 +133,4 @@ const Signup = () => {
   );
 };
 export default Signup;
+
