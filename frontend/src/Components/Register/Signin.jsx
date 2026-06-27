@@ -35,7 +35,13 @@ const Signin = () => {
     if (token) {
       dispatch(currentUser(token));
     }
-  }, [token]);
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    if (auth.signin?.jwt) {
+      dispatch(currentUser(auth.signin.jwt));
+    }
+  }, [auth.signin, dispatch]);
 
   useEffect(() => {
     // If the current user data is available, navigate to the homepage

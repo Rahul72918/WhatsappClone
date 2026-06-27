@@ -34,7 +34,13 @@ const Signup = () => {
 
   useEffect(() => {
     if (token) dispatch(currentUser(token));
-  }, [token]);
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    if (auth.signup?.jwt) {
+      dispatch(currentUser(auth.signup.jwt));
+    }
+  }, [auth.signup, dispatch]);
 
   useEffect(() => {
     if (auth.reqUser?.name) {
