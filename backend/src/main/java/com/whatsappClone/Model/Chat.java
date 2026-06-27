@@ -33,7 +33,7 @@ public class Chat {
     @ManyToMany
     private Set<User> users = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "chat")
     private List<Message> messages = new ArrayList<>();
 
     public Integer getId() {
