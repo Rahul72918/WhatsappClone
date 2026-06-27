@@ -1,103 +1,77 @@
-# WhatsApp Clone
+# WhatsApp Clone (Full-Stack)
 
-WhatsApp Clone is a web-based chat application inspired by WhatsApp. This project includes both the frontend, built with React, and the backend, built with Spring Boot.
+A full-stack, real-time messaging application inspired by WhatsApp. This project allows users to sign up, search for friends, create 1-on-1 private chats, and form group chats—all with instant, real-time message delivery.
 
-## Table of Contents
+## 🚀 Technologies Used
 
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
+### Frontend
+* **React.js** - UI components and routing
+* **Redux Thunk** - Global state management
+* **Tailwind CSS** - Styling and responsive design
+* **SockJS & StompJS** - WebSocket client for real-time messaging
 
-## Features
+### Backend
+* **Java & Spring Boot** - REST APIs and WebSocket server
+* **Spring Security & JWT** - Stateless, secure authentication
+* **Hibernate / Spring Data JPA** - Database ORM
+* **MySQL** - Relational database management
 
-- Real-time chat functionality.
-- User authentication and registration.
-- Group chat creation.
-- Sending text messages and attachments.
-- User profile management.
-- Message timestamps and read receipts.
+---
 
-## Technologies Used
+## ✨ Features
 
-- Frontend:
+* **JWT Authentication:** Secure Sign up and Login system using JSON Web Tokens.
+* **Real-time Messaging:** Instant message delivery using WebSockets (STOMP protocol). No page refreshes needed!
+* **Global User Search:** Find friends by searching their partial name or email address.
+* **1-on-1 Chats:** Start private, secure conversations with other registered users.
+* **Group Chats:** Create groups with multiple participants.
 
-  - React
-  - Redux for state management
-  - Material-UI for UI components
-  - WebSocket for real-time messaging
-  - Tailwind CSS
+---
 
-- Backend:
-  - Spring Boot
-  - Spring Security for authentication
-  - Spring Data JPA for data persistence
-  - WebSocket for real-time messaging
-  - MySQL for database storage
+## 💻 Getting Started (Local Setup)
 
-## Getting Started
-
-Follow these instructions to set up and run the WhatsApp Clone on your local machine.
+Follow these steps to clone and run the project on your local machine.
 
 ### Prerequisites
+Make sure you have the following installed:
+* **Java 17** or higher
+* **Node.js**
+* **MySQL Server**
 
-- Node.js and npm - [Download and Install Node.js](https://nodejs.org/)
-- Java Development Kit (JDK) - [Download and Install JDK](https://adoptopenjdk.net/)
+### 1. Clone the Repository
+Open your terminal and run:
+```bash
+git clone <your-github-repository-url>
+cd Whatsapp-clone
+```
 
-### Installation
+### 2. Database Configuration
+Before running the backend, you need to prepare your local database.
+1. Open MySQL (via Workbench or terminal) and create a new database:
+   ```sql
+   CREATE DATABASE whatsapp_db;
+   ```
+2. Open `backend/src/main/resources/application.properties` in your code editor.
+3. Update the database credentials to match your local MySQL setup (if they are different):
+   ```properties
+   spring.datasource.username=root
+   spring.datasource.password=your_local_password
+   ```
+   *(Note: The code currently defaults to username `root` and password `@R1a2h3u4l5` if no environment variables are set).*
 
-1. Clone the repository:
-
-   git clone git@github.com:dipenbhat557/Whatsapp-clone.git
-
-2. Navigate to the frontend directory:
-
-cd whatsapp-clone/frontend
-
-3. Install frontend dependencies:
-
-npm install
-
-4. Navigate to the backend directory:
-
-cd ../backend
-
-5. Open the application.properties file and configure your database settings and JWT secret:
-
-spring.datasource.url=jdbc:mysql://localhost:3306/whatsapp
-spring.datasource.username=root
-spring.datasource.password=password
-...
-jwt.secret=your-secret-key
-
-6. Build and run the backend:
-
+### 3. Run the Backend
+Open a terminal in the `backend` folder and start the Spring Boot server:
+```bash
+cd backend
 ./mvnw spring-boot:run
+```
+*The server will start on `http://localhost:8080`.*
 
-7. Now, navigate back to the frontend directory:
-
-cd ../frontend
-
-8. Start the React development server:
-
+### 4. Run the Frontend
+Open a new, separate terminal in the `frontend` folder, install the dependencies, and start the React app:
+```bash
+cd frontend
+npm install
 npm start
-
-9. The WhatsApp Clone should now be running. Access it in your web browser at http://localhost:3000.
-
-**Usage**
-
-1. Register a new account or log in with an existing one.
-2. Create or join group chats.
-3. Start sending and receiving messages in real-time.
-4. Manage your user profile and settings.
-
-**Contributing**
-I welcome contributions from the community! If you'd like to contribute to this project, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix: git checkout -b feature/my-feature or git checkout -b bugfix/my-bugfix.
-3. Commit your changes and push them to your fork: git commit -m "Add a new feature" and git push origin feature/my-feature.
-4. Create a pull request to the main branch of the original repository.
+```
+*The React app will open in your browser at `http://localhost:3000`.*
